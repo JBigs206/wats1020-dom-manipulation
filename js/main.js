@@ -23,6 +23,23 @@ $( document ).ready(function() {
     //      (NOTE: You do not have to perform any validation on the data as
     //          a base requirement.)
 
+	
+	$('#hideLogin').on('click', function(event){
+		console.log(event);
+		var targetElement = event.target;
+		var container =targetElement.parentElement.parentElement;
+		$(container).find('.user-info').each(function(index, el){
+			if ($(el).is(':visible')){ //checks to see Login has been clicked
+			$(el).fadeOut(); //if clciked, Login user-info fades out
+			targetElement.innerText = "Login"; 
+			
+		}else{
+			$(el).fadeIn(); //if Login has been clicked, Logout user-info fades in
+			targetElement.innerText = "Logout";  
+			$("#login-form").hide("slow"); 
+		}
+		});
+	});
 
     // TODO: Create a function to listen for clicks on all the "View Details"
     // buttons so that when a user clicks a "View Details" button they see
@@ -34,6 +51,31 @@ $( document ).ready(function() {
     //      4. Change the text of the "view details" button to read "hide details" so the user
     //          understands they can hide the text again.
 
+	$('.view-details').on('click', function(event){
+		console.log(event);
+		var targetElement = event.target;
+		var container =targetElement.parentElement.parentElement;
+		$(container).find('.details').each(function(index, el){
+			if ($(el).is(':visible')){ //checks to see if view details has been clciked
+			$(el).fadeOut(2000); //if clicked, view-detail content fades in
+			targetElement.innerText = "View Details";
+			/*$("#show").click(function(){
+			 $("p").show();
+				 }); */	
+			
+		}else{
+			$(el).fadeIn(2000); //if hide deatil is clicked, view detail contnent fades out
+			targetElement.innerText = "Hide Details";
+		/*	$("#show").click(function(){
+			 $("p").show();
+				 }); */
+		}
+		});
+	}); 
+	
+	
+	
+	
     // TODO: Create a function that listens for clicks on the voting buttons and
     // looks at the `data-vote` attribute on each button to see what was voted for,
     // then determines the updated vote breakdown to adjust the progress bars.
@@ -44,4 +86,15 @@ $( document ).ready(function() {
     //      4. Determine the respective percentages (out of 100) for each progress bar.
     //      5. Modify the `width` attribute on each progress bar to set the updated percentage.
 
+	
+	$("#greatBtn").click(function(){ 
+		document.getElementById("greatBar").style.width = "20%"; //increases the progress bar for by 10% if vate is for "Great!"
+		setTimeout(function(){alert("Thanks for voting! She is great!");}, 1000); //prompts alert when voting for "Great!"
+	 });
+	
+	$("#greatestBtn").click(function(){
+		document.getElementById("greatestBar").style.width = "40%";	//increases the progress bar by 10% if vote is for "Greatest all time"
+		setTimeout(function(){alert("Thanks for voting! She is the greatest!");}, 1000); //prompts alert when voting for "Greatest all time"
+	 });  
+	
 });
